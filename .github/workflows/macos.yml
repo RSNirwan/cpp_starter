@@ -1,4 +1,4 @@
-name: build macOS
+name: build_macOS
 
 on: [push, pull_request]
 
@@ -7,6 +7,10 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v1
+    - name: Checkout submodule
+      run: |
+        git submodule sync
+        git submodule update --init --recursive
     - name: cmake
       run: cmake -S . -B build
     - name: build
